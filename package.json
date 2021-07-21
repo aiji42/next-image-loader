@@ -6,6 +6,11 @@
   "repository": "git@github.com:aiji42/next-image-loader.git",
   "author": "aiji42 <aiji42@gmail.com> (https://twitter.com/aiji42_dev)",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint ./src/**/*.ts ./src/*.ts",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
   "peerDependencies": {
     "next": ">=10.0.0"
   },
