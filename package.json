@@ -3,14 +3,21 @@
   "version": "0.0.0",
   "description": "Plugin to transparently override the loader in next/image.",
   "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "git@github.com:aiji42/next-image-loader.git",
   "author": "aiji42 <aiji42@gmail.com> (https://twitter.com/aiji42_dev)",
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./src/**/*.{ts,tsx} ./src/*.{ts,tsx}",
-    "format": "yarn prettier src/**/*.{ts,tsx} --write",
+    "format": "yarn prettier src/*.{ts,tsx} src/**/*.{ts,tsx} --write",
     "test": "jest",
-    "test:coverage": "test --coverage",
+    "test:coverage": "jest --coverage",
     "build": "tsc && ts-add-module-exports"
   },
   "peerDependencies": {
