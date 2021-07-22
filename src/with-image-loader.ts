@@ -1,7 +1,7 @@
 import { ImageLoader } from 'next/image'
 import { NextConfig } from 'next/dist/next-server/server/config-shared'
 
-type WebpackConfig = {
+export type WebpackConfig = {
   resolve: {
     alias: Record<string, string>
   }
@@ -13,7 +13,7 @@ export const withImageLoader =
     return {
       ...nextConfig,
       webpack: (config: WebpackConfig, option: unknown) => {
-        config.resolve.alias['next/image'] = 'next-image-loader/CustomImage'
+        config.resolve.alias['next/image'] = 'next-image-loader/build/CustomImage'
 
         return nextConfig.webpack ? nextConfig.webpack(config, option) : config
       },

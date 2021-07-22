@@ -1,3 +1,3 @@
 export default {
-  collectCoverageFrom: ["src/**/*.{ts,js}"]
+  collectCoverageFrom: ["src/**/*.{ts,js,tsx}"]
 }
