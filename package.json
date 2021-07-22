@@ -9,8 +9,8 @@
   "scripts": {
     "lint": "eslint ./src/**/*.{ts,tsx} ./src/*.{ts,tsx}",
     "format": "yarn prettier src/**/*.{ts,tsx} --write",
-    "test": "jest src/__test__/*.spec.{ts,tsx}",
-    "test:coverage": "yarn test --coverage",
+    "test": "jest",
+    "test:coverage": "test --coverage",
     "build": "tsc && ts-add-module-exports"
   },
   "peerDependencies": {
