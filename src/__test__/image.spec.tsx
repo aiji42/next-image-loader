@@ -1,22 +1,26 @@
 /**
  * @jest-environment jsdom
  */
-import CustomImage from '../CustomImage'
+import CustomImage from '../image'
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import getConfig from 'next/config'
+import { render, screen, cleanup } from '@testing-library/react'
 import { ImageLoaderProps } from 'next/image'
-
-jest.mock('next/config', () => jest.fn())
 
 const customImageLoader = ({ src, width, quality }: ImageLoaderProps) =>
   `${src}?w=${width}&q=${quality || 75}`
 
+const OLD_ENV = { ...process.env }
+
 describe('CustomImage', () => {
-  ;(getConfig as jest.Mock).mockReturnValue({
-    customImageLoader
+  beforeEach(() => {
+    cleanup()
+    process.env = { ...OLD_ENV }
   })
+
   test('The loader configured in config must be used.', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    process.env = { ...process.env, __CUSTOM_IMAGE_LOADER: customImageLoader }
     render(
       <CustomImage
         src="https://example.com/foo.png"
@@ -30,13 +34,12 @@ describe('CustomImage', () => {
     expect(screen.getByRole('img').getAttribute('src')).toMatch(
       /https:\/\/example\.com\/foo\.png\?w=\d+&q=50/
     )
-
   })
 
   test('The props loader must be used first.', () => {
-    ;(getConfig as jest.Mock).mockReturnValue({
-      customImageLoader
-    })
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    process.env = { ...process.env, __CUSTOM_IMAGE_LOADER: customImageLoader }
     render(
       <CustomImage
         src="https://example.com/foo.png"
@@ -44,7 +47,9 @@ describe('CustomImage', () => {
         height={200}
         quality={50}
         priority
-        loader={({ src, width, quality }) => `${src}?width=${width}&quality=${quality || 75}`}
+        loader={({ src, width, quality }) =>
+          `${src}?width=${width}&quality=${quality || 75}`
+        }
       />
     )
 
@@ -54,7 +59,6 @@ describe('CustomImage', () => {
   })
 
   test('If no loader is defined, the default loader in next/image must be used.', () => {
-    ;(getConfig as jest.Mock).mockReturnValue({})
     render(
       <CustomImage
         src="/foo.png"
