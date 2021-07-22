@@ -1942,9 +1942,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-"next-image-loader@link:..":
-  version "0.0.0"
-  uid ""
+next-image-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/next-image-loader/-/next-image-loader-1.0.0.tgz#fe69277714ba66feb5847bdbb22e06ff5949740a"
+  integrity sha512-lwFeN6wx/6ovMB6eDgUVAyAhxZbBfIaupE5Ua7lmZ+PbVfiNI50bAHSSrhKKDsEh5qTjyJu8oQ2P5CHDD/CHyA==
 
 next@11.0.1:
   version "11.0.1"
