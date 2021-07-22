@@ -30,7 +30,7 @@
     "format": "yarn prettier src/*.{ts,tsx} src/**/*.{ts,tsx} --write",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "build": "tsc && ts-add-module-exports",
+    "build": "tsc --project tsconfig.publish.json && ts-add-module-exports",
     "prepare": "husky install",
     "semantic-release": "semantic-release"
   },
