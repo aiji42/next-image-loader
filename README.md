@@ -5,9 +5,9 @@
 
 This plugin enables you to transparently replace the loader of `next/image` with a self-defined custom loader.
 
-For Next.js image optimization, you can choose Vercel (default), Imgix, Cloudinary, or Akamai, but if you want to use other providers (including self-hosting), you need to define the loader in the `next/image` props. If you use other providers (including self-hosting), you need to define the loader in the `next/image` props. This makes it very annoying to have to add a props every time you use `next/image`.
+For Next.js image optimization, you can choose Vercel (default), Imgix, Cloudinary, or Akamai, but if you want to use other providers (including self-hosting), you need to define the loader in the `next/image` props. This makes it very annoying to have to add a props every time you use `next/image`.
 
-This package will relieve you of that stress by enabling you to self-define a custom loader in `next.config.js` and transparently reflect that loader throughout your project.
+This plugin will relieve you of that stress by enabling you to self-define a custom loader in `next.config.js` and transparently reflect that loader throughout your project.
 
 ## Installation
 
