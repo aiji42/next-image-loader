@@ -18,7 +18,7 @@ describe('withImageLoader', () => {
   beforeEach(() => {
     defaultWebpackArgs = [
       { resolve: { alias: { next: 'default/next/path' } }, plugins: [] },
-      { webpack: { DefinePlugin } }
+      { webpack: { DefinePlugin, version: '5.0.0' } }
     ]
   })
   test('The custom loader is set in the replacement of DefinePlugin when the loader is given.', () => {
@@ -33,16 +33,26 @@ describe('withImageLoader', () => {
       { arg: { 'process.env.__CUSTOM_IMAGE_LOADER': undefined } }
     ])
   })
-  it('The next alias is overwritten with the path of the custom component.', () => {
+  it('The next alias is overwritten with the path of the custom component when webpack5.', () => {
     const config = withImageLoader()({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
       next: ['next-image-loader/build', 'default/next/path']
     })
   })
+  it('The next alias is deleted and add the path of the custom component when webpack4.', () => {
+    defaultWebpackArgs = [
+      { resolve: { alias: { next: 'default/next/path' } }, plugins: [] },
+      { webpack: { DefinePlugin, version: '4.0.0' } }
+    ]
+    const config = withImageLoader()({})
+    expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
+      'next/image': 'next-image-loader/build/image'
+    })
+  })
   it('Inherits the given webpack.', () => {
     defaultWebpackArgs = [
       { resolve: { alias: { next: ['default/next/path'] } }, plugins: [] },
-      { webpack: { DefinePlugin } }
+      { webpack: { DefinePlugin, version: '5.0.0' } }
     ]
     const config = withImageLoader()({
       webpack: (config: WebpackConfig) => {

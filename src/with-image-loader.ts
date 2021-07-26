@@ -11,7 +11,7 @@ export type WebpackConfig = {
 
 export type WebpackOption = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  webpack: Record<string, any>
+  webpack: any
   [x: string]: unknown
 }
 
@@ -21,11 +21,16 @@ export const withImageLoader =
     return {
       ...nextConfig,
       webpack: (config: WebpackConfig, option: WebpackOption) => {
-        const nextAlias = config.resolve.alias['next']
-        config.resolve.alias['next'] = [
-          'next-image-loader/build',
-          ...(Array.isArray(nextAlias) ? nextAlias : [nextAlias])
-        ]
+        if (option.webpack.version[0] === '5') {
+          const nextAlias = config.resolve.alias['next']
+          config.resolve.alias['next'] = [
+            'next-image-loader/build',
+            ...(Array.isArray(nextAlias) ? nextAlias : [nextAlias])
+          ]
+        } else {
+          config.resolve.alias['next/image'] = 'next-image-loader/build/image'
+          delete config.resolve.alias['next']
+        }
 
         config.plugins = [
           ...config.plugins,
