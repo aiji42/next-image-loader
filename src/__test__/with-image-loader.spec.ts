@@ -37,7 +37,9 @@ describe('withImageLoader', () => {
     ;(existsSync as jest.Mock).mockReturnValue(false)
     withImageLoader({})
     expect(mockExit).toBeCalledWith(1)
-    expect(errorLog).toBeCalledWith('Error: Not existing `image-loader.js`')
+    expect(errorLog).toBeCalledWith(
+      'Error: Not existing `image-loader.config.js`. Please read https://github.com/aiji42/next-image-loader#usage'
+    )
   })
   test('The custom loader file path is set in the replacement of DefinePlugin.', () => {
     const config = withImageLoader({})
@@ -45,7 +47,7 @@ describe('withImageLoader', () => {
       config.webpack(...defaultWebpackArgs).plugins[0].arg[
         'process.env.__CUSTOM_IMAGE_LOADER'
       ]
-    ).toMatch(/".*\/image-loader\.js"$/)
+    ).toMatch(/".*\/image-loader\.config\.js"$/)
   })
   it('The next alias is overwritten with the path of the custom component when webpack5.', () => {
     const config = withImageLoader({})

@@ -16,12 +16,16 @@ export type WebpackOption = {
   [x: string]: unknown
 }
 
+const imageLoaderFileName = 'image-loader.config.js'
+
 export const withImageLoader = (
   nextConfig: Partial<NextConfig>
 ): Partial<NextConfig> => {
-  const loaderPath = resolve('./image-loader.js')
+  const loaderPath = resolve(imageLoaderFileName)
   if (!existsSync(loaderPath)) {
-    console.error('Error: Not existing `image-loader.js`')
+    console.error(
+      `Error: Not existing \`${imageLoaderFileName}\`. Please read https://github.com/aiji42/next-image-loader#usage`
+    )
     process.exit(1)
   }
 
