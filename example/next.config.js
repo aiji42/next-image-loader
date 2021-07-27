@@ -1,10 +1,8 @@
-const withImageLoader = require('next-image-loader')(
-  ({ src, width, quality }) =>
-    `https://res.cloudinary.com/demo/image/upload/w_${width}/q_${
-      quality || 75
-    }/${src.replace(/^\//, '')}`
-)
+const withImageLoader = require('next-image-loader')
 
 module.exports = withImageLoader({
-  reactStrictMode: true
+  reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_IMAGE_DOMAIN: 'https://res.cloudinary.com'
+  }
 })
