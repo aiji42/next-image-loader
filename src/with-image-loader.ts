@@ -43,12 +43,7 @@ export const withImageLoader = (
         delete config.resolve.alias['next']
       }
 
-      config.plugins = [
-        ...config.plugins,
-        new option.webpack.DefinePlugin({
-          'process.env.__CUSTOM_IMAGE_LOADER': `"${loaderPath}"`
-        })
-      ]
+      config.resolve.alias['custom-image-loader'] = loaderPath
 
       return nextConfig.webpack ? nextConfig.webpack(config, option) : config
     }

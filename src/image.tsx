@@ -8,10 +8,7 @@ class CustomImageLoader {
   }
 }
 export const imageLoader = new CustomImageLoader()
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-require(process.env.__CUSTOM_IMAGE_LOADER)
+require('custom-image-loader')
 
 const CustomImage: FC<ImageProps> = (props) => {
   return <Image {...props} loader={props.loader ?? imageLoader.loader} />
