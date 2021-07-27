@@ -1,5 +1,9 @@
 import { WebpackConfig, withImageLoader } from '../with-image-loader'
-import { ImageLoaderProps } from 'next/image'
+import { existsSync } from 'fs'
+
+jest.mock('fs', () => ({
+  existsSync: jest.fn()
+}))
 
 class DefinePlugin {
   arg: unknown
@@ -8,33 +12,42 @@ class DefinePlugin {
   }
 }
 
-const loader = ({ src, width, quality }: ImageLoaderProps) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+const errorLog = jest
+  .spyOn(console, 'error')
+  .mockImplementation((mes) => console.log(mes))
+
+const mockExit = jest
+  .spyOn(process, 'exit')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  .mockImplementation((code) => console.log('exit: ', code))
 
 let defaultWebpackArgs: unknown[] = []
 
 describe('withImageLoader', () => {
   beforeEach(() => {
+    jest.resetModules()
     defaultWebpackArgs = [
       { resolve: { alias: { next: 'default/next/path' } }, plugins: [] },
       { webpack: { DefinePlugin, version: '5.0.0' } }
     ]
+    ;(existsSync as jest.Mock).mockReturnValue(true)
   })
-  test('The custom loader is set in the replacement of DefinePlugin when the loader is given.', () => {
-    const config = withImageLoader(loader)({})
-    expect(config.webpack(...defaultWebpackArgs).plugins).toEqual([
-      { arg: { 'process.env.__CUSTOM_IMAGE_LOADER': loader } }
-    ])
+  test('Exit unexpectedly when The custom loader file is missing.', () => {
+    ;(existsSync as jest.Mock).mockReturnValue(false)
+    expect(mockExit).toBeCalledWith(1)
+    expect(errorLog).toBeCalledWith('Error: Not existing `image-loader.js`')
   })
-  it('`undefined` is set in the replacement of DefinePlugin when the loader is undefined', () => {
-    const config = withImageLoader()({})
-    expect(config.webpack(...defaultWebpackArgs).plugins).toEqual([
-      { arg: { 'process.env.__CUSTOM_IMAGE_LOADER': undefined } }
-    ])
+  test('The custom loader file path is set in the replacement of DefinePlugin.', () => {
+    const config = withImageLoader({})
+    expect(
+      config.webpack(...defaultWebpackArgs).plugins[0].arg[
+        'process.env.__CUSTOM_IMAGE_LOADER'
+      ]
+    ).toMatch(/".*\/image-loader\.js"$/)
   })
   it('The next alias is overwritten with the path of the custom component when webpack5.', () => {
-    const config = withImageLoader()({})
+    const config = withImageLoader({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
       next: ['next-image-loader/build', 'default/next/path']
     })
@@ -44,7 +57,7 @@ describe('withImageLoader', () => {
       { resolve: { alias: { next: 'default/next/path' } }, plugins: [] },
       { webpack: { DefinePlugin, version: '4.0.0' } }
     ]
-    const config = withImageLoader()({})
+    const config = withImageLoader({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
       'next/image': 'next-image-loader/build/image'
     })
@@ -54,7 +67,7 @@ describe('withImageLoader', () => {
       { resolve: { alias: { next: ['default/next/path'] } }, plugins: [] },
       { webpack: { DefinePlugin, version: '5.0.0' } }
     ]
-    const config = withImageLoader()({
+    const config = withImageLoader({
       webpack: (config: WebpackConfig) => {
         config.resolve.alias['foo'] = 'baa'
         return config
