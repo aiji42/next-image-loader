@@ -8,7 +8,6 @@ class CustomImageLoader {
   }
 }
 export const imageLoader = new CustomImageLoader()
-require('custom-image-loader')
 
 const CustomImage: FC<ImageProps> = (props) => {
   return <Image {...props} loader={props.loader ?? imageLoader.loader} />

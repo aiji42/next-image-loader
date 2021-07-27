@@ -6,6 +6,7 @@ export type WebpackConfig = {
   resolve: {
     alias: Record<string, string | string[]>
   }
+  entry: () => Promise<Record<string, unknown[]>>
   plugins: unknown[]
   [x: string]: unknown
 }
@@ -43,7 +44,14 @@ export const withImageLoader = (
         delete config.resolve.alias['next']
       }
 
-      config.resolve.alias['custom-image-loader'] = loaderPath
+      const originalEntry = config.entry
+      config.entry = async () => {
+        const entries = await originalEntry()
+        if (entries['main.js']) {
+          entries['main.js'].push(loaderPath)
+        }
+        return entries
+      }
 
       return nextConfig.webpack ? nextConfig.webpack(config, option) : config
     }
