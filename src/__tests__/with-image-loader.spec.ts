@@ -41,18 +41,13 @@ describe('withImageLoader', () => {
       'Error: Not existing `image-loader.config.js`. Please read https://github.com/aiji42/next-image-loader#usage'
     )
   })
-  test('The custom loader file path is set in the replacement of DefinePlugin.', () => {
-    const config = withImageLoader({})
-    expect(
-      config.webpack(...defaultWebpackArgs).plugins[0].arg[
-        'process.env.__CUSTOM_IMAGE_LOADER'
-      ]
-    ).toMatch(/".*\/image-loader\.config\.js"$/)
-  })
   it('The next alias is overwritten with the path of the custom component when webpack5.', () => {
     const config = withImageLoader({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
-      next: ['next-image-loader/build', 'default/next/path']
+      next: ['next-image-loader/build', 'default/next/path'],
+      'custom-image-loader': expect.stringMatching(
+        /.*\/image-loader\.config\.js$/
+      )
     })
   })
   it('The next alias is deleted and add the path of the custom component when webpack4.', () => {
@@ -62,7 +57,10 @@ describe('withImageLoader', () => {
     ]
     const config = withImageLoader({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
-      'next/image': 'next-image-loader/build/image'
+      'next/image': 'next-image-loader/build/image',
+      'custom-image-loader': expect.stringMatching(
+        /.*\/image-loader\.config\.js$/
+      )
     })
   })
   it('Inherits the given webpack.', () => {
@@ -79,7 +77,10 @@ describe('withImageLoader', () => {
     expect(config.webpack(...defaultWebpackArgs).resolve).toEqual({
       alias: {
         foo: 'baa',
-        next: ['next-image-loader/build', 'default/next/path']
+        next: ['next-image-loader/build', 'default/next/path'],
+        'custom-image-loader': expect.stringMatching(
+          /.*\/image-loader\.config\.js$/
+        )
       }
     })
   })

@@ -9,12 +9,9 @@ import { ImageLoaderProps } from 'next/image'
 const customImageLoader = ({ src, width, quality }: ImageLoaderProps) =>
   `${src}?w=${width}&q=${quality || 75}&customImageLoader=true`
 
-const OLD_ENV = { ...process.env }
-
 describe('CustomImage', () => {
   beforeEach(() => {
     cleanup()
-    process.env = { ...OLD_ENV, __CUSTOM_IMAGE_LOADER: '' }
   })
 
   test('The loader configured in config must be used.', () => {
