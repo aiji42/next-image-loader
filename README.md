@@ -16,13 +16,10 @@ npm install --save next-image-loader
 ```
 
 ## Usage
+1. Write `withImageLoader` in `next.config.js`.
 ```js
 // next.config.js
-const withImageLoader = require('next-image-loader')(
-  // write self-define a custom loader
-  // (resolverProps: { src: string; width: number; quality?: number }) => string
-  ({ src, width, quality }) => `${src}?width=${width}&quality=${quality || 75}`
-)
+const withImageLoader = require('next-image-loader')
 
 module.export = withImageLoader({
   // write your next.js configuration values.
@@ -33,9 +30,7 @@ If you are using next-compose-plugins
 ```js
 // next.config.js
 const withPlugins = require('next-compose-plugins')
-const withImageLoader = require('next-image-loader')(
-  ({ src, width, quality }) => `${src}?width=${width}&quality=${quality || 75}`
-)
+const withImageLoader = require('next-image-loader')
 
 module.exports = withPlugins([
   withImageLoader
@@ -45,6 +40,18 @@ module.exports = withPlugins([
 })
 ```
 
+2\. Put `image-loader.config.js` in the project root (in the same directory as next.config.js).
+```js
+// image-loader.config.js
+import { imageLoader } from 'next-image-loader/build/image'
+
+imageLoader.set(
+  // write self-define a custom loader
+  // (resolverProps: { src: string; width: number; quality?: number }) => string
+  ({ src, width, quality }) => 
+    `${process.env.NEXT_PUBLIC_OPTIMIZE_DOMAIN}?url=${encodeURIComponent(src)}&w=${Math.min(width, 1080)}&q=${quality || 75}`
+)
+```
 
 ## Contributing
 Please read [CONTRIBUTING.md](https://github.com/aiji42/next-image-loader/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.

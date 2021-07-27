@@ -1,26 +1,24 @@
 /**
  * @jest-environment jsdom
  */
-import CustomImage from '../image'
+import CustomImage, { imageLoader } from '../image'
 import React from 'react'
 import { render, screen, cleanup } from '@testing-library/react'
 import { ImageLoaderProps } from 'next/image'
 
 const customImageLoader = ({ src, width, quality }: ImageLoaderProps) =>
-  `${src}?w=${width}&q=${quality || 75}`
+  `${src}?w=${width}&q=${quality || 75}&customImageLoader=true`
 
 const OLD_ENV = { ...process.env }
 
 describe('CustomImage', () => {
   beforeEach(() => {
     cleanup()
-    process.env = { ...OLD_ENV }
+    process.env = { ...OLD_ENV, __CUSTOM_IMAGE_LOADER: '' }
   })
 
   test('The loader configured in config must be used.', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    process.env = { ...process.env, __CUSTOM_IMAGE_LOADER: customImageLoader }
+    imageLoader.set(customImageLoader)
     render(
       <CustomImage
         src="https://example.com/foo.png"
@@ -32,14 +30,12 @@ describe('CustomImage', () => {
     )
 
     expect(screen.getByRole('img').getAttribute('src')).toMatch(
-      /https:\/\/example\.com\/foo\.png\?w=\d+&q=50/
+      /https:\/\/example\.com\/foo\.png\?w=\d+&q=50&customImageLoader=true/
     )
   })
 
   test('The props loader must be used first.', () => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    process.env = { ...process.env, __CUSTOM_IMAGE_LOADER: customImageLoader }
+    imageLoader.set(customImageLoader)
     render(
       <CustomImage
         src="https://example.com/foo.png"
@@ -59,6 +55,7 @@ describe('CustomImage', () => {
   })
 
   test('If no loader is defined, the default loader in next/image must be used.', () => {
+    imageLoader.set(undefined)
     render(
       <CustomImage
         src="/foo.png"
