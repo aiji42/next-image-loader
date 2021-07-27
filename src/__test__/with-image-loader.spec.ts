@@ -35,6 +35,7 @@ describe('withImageLoader', () => {
   })
   test('Exit unexpectedly when The custom loader file is missing.', () => {
     ;(existsSync as jest.Mock).mockReturnValue(false)
+    withImageLoader({})
     expect(mockExit).toBeCalledWith(1)
     expect(errorLog).toBeCalledWith('Error: Not existing `image-loader.js`')
   })
