@@ -1,7 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import CustomImage, { imageLoader } from '../image'
+import CustomImage from '../image'
+import { imageLoader } from '../image-loader'
 import React from 'react'
 import { render, screen, cleanup } from '@testing-library/react'
 import { ImageLoaderProps } from 'next/image'
@@ -15,7 +16,7 @@ describe('CustomImage', () => {
   })
 
   test('The loader configured in config must be used.', () => {
-    imageLoader.set(customImageLoader)
+    imageLoader.loader = customImageLoader
     render(
       <CustomImage
         src="https://example.com/foo.png"
@@ -32,7 +33,7 @@ describe('CustomImage', () => {
   })
 
   test('The props loader must be used first.', () => {
-    imageLoader.set(customImageLoader)
+    imageLoader.loader = customImageLoader
     render(
       <CustomImage
         src="https://example.com/foo.png"
@@ -52,7 +53,7 @@ describe('CustomImage', () => {
   })
 
   test('If no loader is defined, the default loader in next/image must be used.', () => {
-    imageLoader.set(undefined)
+    imageLoader.loader = undefined
     render(
       <CustomImage
         src="/foo.png"

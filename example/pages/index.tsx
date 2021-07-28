@@ -21,6 +21,8 @@ export default function Home() {
           <code className={styles.code}>pages/index.js</code>
         </p>
 
+        <Image src="/beach_huts.jpg" priority width={712} height={457} />
+
         <Image src="/beach_huts.jpg" width={712} height={457} />
 
         <div className={styles.grid}>

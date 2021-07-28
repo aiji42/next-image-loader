@@ -45,13 +45,14 @@ describe('withImageLoader', () => {
       'Error: Not existing `image-loader.config.js`. Please read https://github.com/aiji42/next-image-loader#usage'
     )
   })
-  test('The loader file is added to main.js of entry.', () => {
+  test('The loader file is added to main.js and pages/_document of entry.', () => {
     defaultWebpackArgs = [
       {
         resolve: { alias: { next: 'default/next/path' } },
         plugins: [],
         entry: async () => ({
-          'main.js': []
+          'main.js': [],
+          'pages/_document': []
         })
       },
       { webpack: { DefinePlugin, version: '5.0.0' } }
@@ -62,6 +63,9 @@ describe('withImageLoader', () => {
       .entry()
       .then((entries: { [x: string]: unknown[] }) => {
         expect(entries['main.js'][0]).toMatch(/.*\/image-loader\.config\.js$/)
+        expect(entries['pages/_document'][0]).toMatch(
+          /.*\/image-loader\.config\.js$/
+        )
       })
   })
   test('If main.js is not in entry, the loader file is not added.', () => {

@@ -43,13 +43,12 @@ module.exports = withPlugins([
 2\. Put `image-loader.config.js` in the project root (in the same directory as next.config.js).
 ```js
 // image-loader.config.js
-import { imageLoader } from 'next-image-loader/build/image'
+import { imageLoader } from 'next-image-loader/build/image-loader'
 
-imageLoader.set(
-  // write self-define a custom loader
-  // (resolverProps: { src: string; width: number; quality?: number }) => string
-  ({ src, width, quality }) => 
-    `${process.env.NEXT_PUBLIC_OPTIMIZE_DOMAIN}?url=${encodeURIComponent(src)}&w=${Math.min(width, 1080)}&q=${quality || 75}`
+// write self-define a custom loader
+// (resolverProps: { src: string; width: number; quality?: number }) => string
+imageLoader.loader = ({ src, width, quality }) => 
+  `${process.env.NEXT_PUBLIC_OPTIMIZE_DOMAIN}?url=${encodeURIComponent(src)}&w=${Math.min(width, 1080)}&q=${quality || 75}`
 )
 ```
 
