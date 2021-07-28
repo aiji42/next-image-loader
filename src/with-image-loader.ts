@@ -47,8 +47,14 @@ export const withImageLoader = (
       const originalEntry = config.entry
       config.entry = async () => {
         const entries = await originalEntry()
-        if (entries['main.js']) {
-          entries['main.js'].push(loaderPath)
+        if (entries['main.js'] && !entries['main.js'].includes(loaderPath)) {
+          entries['main.js'].unshift(loaderPath)
+        }
+        if (
+          entries['pages/_document'] &&
+          !entries['pages/_document'].includes(loaderPath)
+        ) {
+          entries['pages/_document'].unshift(loaderPath)
         }
         return entries
       }

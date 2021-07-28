@@ -1,13 +1,6 @@
 import React, { FC } from 'react'
-import Image, { ImageLoader, ImageProps } from 'next/dist/client/image'
-
-class CustomImageLoader {
-  loader: undefined | ImageLoader
-  set(loader: ImageLoader | undefined) {
-    this.loader = loader
-  }
-}
-export const imageLoader = new CustomImageLoader()
+import Image, { ImageProps } from 'next/dist/client/image'
+import { imageLoader } from './image-loader'
 
 const CustomImage: FC<ImageProps> = (props) => {
   return <Image {...props} loader={props.loader ?? imageLoader.loader} />
