@@ -1,25 +1,14 @@
-import { NextConfig } from 'next/dist/next-server/server/config-shared'
+import { NextConfig } from 'next/dist/server/config'
 
-export type WebpackConfig = {
-  resolve: {
-    alias: Record<string, string | string[]>
-  }
-  entry: () => Promise<Record<string, unknown[]>>
-  plugins: unknown[]
-  [x: string]: unknown
-}
-
-export type WebpackOption = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  webpack: any
-  [x: string]: unknown
-}
+export type Webpack = Exclude<NextConfig['webpack'], null | undefined>
+export type WebpackConfig = Parameters<Webpack>[0]
+export type WebpackOption = Parameters<Webpack>[1]
 
 const imageLoaderFileName = './image-loader.config.js'
 
 export const withImageLoader = (
-  nextConfig: Partial<NextConfig>
-): Partial<NextConfig> => {
+  nextConfig: NextConfig
+): NextConfig & { webpack: Webpack } => {
   return {
     ...nextConfig,
     webpack: (config: WebpackConfig, option: WebpackOption) => {

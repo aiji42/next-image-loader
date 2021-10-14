@@ -1,4 +1,4 @@
-import { WebpackConfig, withImageLoader } from '../with-image-loader'
+import { Webpack, WebpackConfig, withImageLoader } from '../with-image-loader'
 import { existsSync } from 'fs'
 
 jest.mock('fs', () => ({
@@ -12,7 +12,7 @@ class DefinePlugin {
   }
 }
 
-let defaultWebpackArgs: unknown[] = []
+let defaultWebpackArgs: Parameters<Webpack> = [{}, {}] as Parameters<Webpack>
 
 describe('withImageLoader', () => {
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe('withImageLoader', () => {
         entry: async () => ({})
       },
       { webpack: { DefinePlugin, version: '5.0.0' } }
-    ]
+    ] as Parameters<Webpack>
     ;(existsSync as jest.Mock).mockReturnValue(true)
   })
   test('The loader file is added to main.js and pages/_document of entry.', () => {
@@ -38,7 +38,7 @@ describe('withImageLoader', () => {
         })
       },
       { webpack: { DefinePlugin, version: '5.0.0' } }
-    ]
+    ] as Parameters<Webpack>
     const config = withImageLoader({})
     return config
       .webpack(...defaultWebpackArgs)
@@ -60,7 +60,7 @@ describe('withImageLoader', () => {
         })
       },
       { webpack: { DefinePlugin, version: '5.0.0' } }
-    ]
+    ] as Parameters<Webpack>
     const config = withImageLoader({})
     return config
       .webpack(...defaultWebpackArgs)
@@ -79,7 +79,7 @@ describe('withImageLoader', () => {
     defaultWebpackArgs = [
       { resolve: { alias: { next: 'default/next/path' } }, plugins: [] },
       { webpack: { DefinePlugin, version: '4.0.0' } }
-    ]
+    ] as Parameters<Webpack>
     const config = withImageLoader({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
       'next/image': 'next-image-loader/build/image'
@@ -89,7 +89,7 @@ describe('withImageLoader', () => {
     defaultWebpackArgs = [
       { resolve: { alias: { next: ['default/next/path'] } }, plugins: [] },
       { webpack: { DefinePlugin, version: '5.0.0' } }
-    ]
+    ] as Parameters<Webpack>
     const config = withImageLoader({
       webpack: (config: WebpackConfig) => {
         config.resolve.alias['foo'] = 'baa'
