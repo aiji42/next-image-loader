@@ -21,7 +21,7 @@ npm install --save next-image-loader
 // next.config.js
 const withImageLoader = require('next-image-loader')
 
-module.export = withImageLoader({
+module.exports = withImageLoader({
   // write your next.js configuration values.
 })
 ```
