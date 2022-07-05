@@ -4,6 +4,10 @@
   "description": "Plugin to transparently override the loader in next/image.",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
+  "exports": {
+    ".": "./build/index.js",
+    "./image-loader": "./build/image-loader.js"
+  },
   "files": [
     "build"
   ],
