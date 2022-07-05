@@ -4,10 +4,6 @@
   "description": "Plugin to transparently override the loader in next/image.",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
-  "exports": {
-    ".": "./build/index.js",
-    "./image-loader": "./build/image-loader.js"
-  },
   "files": [
     "build"
   ],
@@ -28,8 +24,7 @@
   "scripts": {
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "build": "node build.js",
-    "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir './build'",
+    "build": "tsc && ts-add-module-exports",
     "prepare": "husky install",
     "semantic-release": "semantic-release",
     "prepack": "yarn build"
@@ -46,7 +41,6 @@
     "@types/node": "^18.0.1",
     "@vitejs/plugin-react": "^1.3.2",
     "c8": "^7.11.3",
-    "esbuild": "^0.14.48",
     "husky": "^8.0.1",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
@@ -55,6 +49,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "semantic-release": "^19.0.3",
+    "ts-add-module-exports": "^1.0.0",
     "typescript": "^4.7.4",
     "vitest": "^0.17.0"
   },
