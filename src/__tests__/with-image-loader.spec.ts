@@ -1,8 +1,9 @@
+import { describe, test, it, expect, beforeEach, vi, Mock } from 'vitest'
 import { Webpack, WebpackConfig, withImageLoader } from '../with-image-loader'
 import { existsSync } from 'fs'
 
-jest.mock('fs', () => ({
-  existsSync: jest.fn()
+vi.mock('fs', () => ({
+  existsSync: vi.fn()
 }))
 
 class DefinePlugin {
@@ -16,7 +17,7 @@ let defaultWebpackArgs: Parameters<Webpack> = [{}, {}] as Parameters<Webpack>
 
 describe('withImageLoader', () => {
   beforeEach(() => {
-    jest.resetModules()
+    vi.resetModules()
     defaultWebpackArgs = [
       {
         resolve: { alias: { next: 'default/next/path' } },
@@ -25,7 +26,7 @@ describe('withImageLoader', () => {
       },
       { webpack: { DefinePlugin, version: '5.0.0' } }
     ] as Parameters<Webpack>
-    ;(existsSync as jest.Mock).mockReturnValue(true)
+    ;(existsSync as Mock).mockReturnValue(true)
   })
   test('The loader file is added to main.js and pages/_document of entry.', () => {
     defaultWebpackArgs = [

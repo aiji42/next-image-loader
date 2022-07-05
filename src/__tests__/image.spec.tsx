@@ -1,6 +1,4 @@
-/**
- * @jest-environment jsdom
- */
+import { describe, test, expect, beforeEach } from 'vitest'
 import CustomImage from '../image'
 import { imageLoader } from '../image-loader'
 import React from 'react'
