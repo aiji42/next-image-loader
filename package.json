@@ -32,7 +32,7 @@
     "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir './build'",
     "prepare": "husky install",
     "semantic-release": "semantic-release",
-    "prepack": "yarn build && yarn build:types"
+    "prepack": "yarn build"
   },
   "peerDependencies": {
     "next": ">=10.0.0",
