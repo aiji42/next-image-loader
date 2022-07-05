@@ -32,7 +32,8 @@
     "test:coverage": "vitest run --coverage",
     "build": "tsc --project tsconfig.publish.json && ts-add-module-exports",
     "prepare": "husky install",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepack": "yarn build"
   },
   "peerDependencies": {
     "next": ">=10.0.0",
