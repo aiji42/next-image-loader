@@ -1,16 +1,16 @@
 {
   "name": "next-image-loader",
-  "version": "0.0.0-development",
+  "version": "0.0.0",
   "description": "Plugin to transparently override the loader in next/image.",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
     "build"
   ],
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aiji42/next-image-loader"
   },
-  "repository": "git@github.com:aiji42/next-image-loader.git",
   "author": "aiji42 <aiji42@gmail.com> (https://twitter.com/aiji42_dev)",
   "license": "MIT",
   "keywords": [
@@ -21,14 +21,10 @@
     "image optimize",
     "image loader"
   ],
-  "bugs": {
-    "url": "https://github.com/aiji42/next-image-loader/issues"
-  },
-  "homepage": "https://github.com/aiji42/next-image-loader#readme",
   "scripts": {
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "build": "tsc --project tsconfig.publish.json && ts-add-module-exports",
+    "build": "tsc && ts-add-module-exports",
     "prepare": "husky install",
     "semantic-release": "semantic-release",
     "prepack": "yarn build"
