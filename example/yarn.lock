@@ -1382,10 +1382,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-next-image-loader@2.1.0-beta.1:
-  version "2.1.0-beta.1"
-  resolved "https://registry.yarnpkg.com/next-image-loader/-/next-image-loader-2.1.0-beta.1.tgz#6a3095375970b66b5ea03897caab493c1cb7f808"
-  integrity sha512-UXYsgDoenAlqSUTAXR4m2qFpSuFT5w0Y67VSus8TPaoJodtmJ8diLeZKRPHoo1/wsma2wRbLkTAj4CegZ/5FsQ==
+next-image-loader@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/next-image-loader/-/next-image-loader-2.1.0.tgz#8f9c3305d2365f409aa4f8798be17dcdf3e57b97"
+  integrity sha512-hF/d/t5Ea/7NXFCNeIcuIybVUPCjxs596lAnJs2Sd3xIGSgyBHjsbMlJUzzgYNrVSynQOJtbS0IFzfCGhn50Wg==
 
 next@12.2.0:
   version "12.2.0"

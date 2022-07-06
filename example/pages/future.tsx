@@ -19,7 +19,7 @@ export default function Page() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <a href="https://github/aiji42/next-image-loader">
+          <a href="https://github.com/aiji42/next-image-loader">
             next-image-loader
           </a>{' '}
           <br /> with next/future/image
