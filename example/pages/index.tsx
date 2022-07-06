@@ -34,8 +34,7 @@ export default function Page() {
 
 module.exports = withImageLoader({
   // write your next.js configuration values.
-})
-`}</code>
+})`}</code>
         </pre>
 
         <p className={styles.description}>
@@ -49,8 +48,7 @@ module.exports = withImageLoader({
 imageLoader.loader = ({ src, width, quality }) => {
   return 'https://res.cloudinary.com/demo/image/upload' +
          \`/w_\${width}/q_\${quality || 75}/\${src.replace(/^\\//, '')}\`
-}
-`}</code>
+}`}</code>
         </pre>
 
         <div style={{ marginTop: 48 }} />

@@ -31,9 +31,7 @@ export default function Page() {
         </p>
 
         <pre>
-          <code className="language-javascript">{`
-\`\`\`js
-const withImageLoader = require('next-image-loader')
+          <code className="language-javascript">{`const withImageLoader = require('next-image-loader')
 
 module.exports = withImageLoader({
   experimental: {
@@ -42,9 +40,7 @@ module.exports = withImageLoader({
     },
   },
   // write your next.js configuration values.
-})
-\`\`\`
-`}</code>
+})`}</code>
         </pre>
 
         <p className={styles.description}>
@@ -53,16 +49,12 @@ module.exports = withImageLoader({
         </p>
 
         <pre>
-          <code className="language-javascript">{`
-\`\`\`js
-import { imageLoader } from 'next-image-loader/image-loader'
+          <code className="language-javascript">{`import { imageLoader } from 'next-image-loader/image-loader'
 
 imageLoader.loader = ({ src, width, quality }) => {
   return 'https://res.cloudinary.com/demo/image/upload' +
          \`/w_\${width}/q_\${quality || 75}/\${src.replace(/^\\//, '')}\`
-}
-\`\`\`
-`}</code>
+}`}</code>
         </pre>
 
         <div style={{ marginTop: 48 }} />
