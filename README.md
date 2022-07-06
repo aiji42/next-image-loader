@@ -40,7 +40,7 @@ module.exports = withPlugins([
 })
 ```
 
-2\. Put `image-loader.config.js` in the project root (in the same directory as next.config.js).
+2\. Create `image-loader.config.js` in your project root (in the same directory as next.config.js).
 ```js
 // image-loader.config.js
 import { imageLoader } from 'next-image-loader/image-loader'
