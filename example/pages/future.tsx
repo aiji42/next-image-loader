@@ -31,7 +31,7 @@ export default function Page() {
         </p>
 
         <pre>
-          <code className="language-javascript">{`const withImageLoader = require('next-image-loader')
+          <code className="language-javascript">{`const { withImageLoader } = require('next-image-loader')
 
 module.exports = withImageLoader({
   experimental: {
