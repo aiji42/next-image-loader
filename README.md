@@ -51,7 +51,7 @@ imageLoader.loader = ({ src, width, quality }) =>
   `${process.env.NEXT_PUBLIC_OPTIMIZE_DOMAIN}?url=${encodeURIComponent(src)}&w=${Math.min(width, 1080)}&q=${quality || 75}`
 ```
 
-#### `next/future/image` (Next.js >= v12.2)
+### `next/future/image` (Next.js >= v12.2)
 
 This library is supporting [`next/future/image`](https://nextjs.org/docs/api-reference/next/future/image) on Next.js since v12.2.
 
