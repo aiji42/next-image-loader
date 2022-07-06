@@ -20,6 +20,8 @@ export const withImageLoader = (
         ]
       } else {
         config.resolve.alias['next/image'] = 'next-image-loader/build/image'
+        config.resolve.alias['next/future/image'] =
+          'next-image-loader/build/future/image'
         delete config.resolve.alias['next']
       }
 
