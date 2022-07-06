@@ -19,7 +19,7 @@ npm install --save next-image-loader
 1\. Write `withImageLoader` in `next.config.js`.
 ```js
 // next.config.js
-const withImageLoader = require('next-image-loader')
+const { withImageLoader } = require('next-image-loader')
 
 module.exports = withImageLoader({
   // write your next.js configuration values.
@@ -29,7 +29,7 @@ module.exports = withImageLoader({
 If you are using next-compose-plugins
 ```js
 // next.config.js
-const withPlugins = require('next-compose-plugins')
+const { withImageLoader } = require('next-image-loader')
 const withImageLoader = require('next-image-loader')
 
 module.exports = withPlugins([
@@ -57,7 +57,7 @@ This library is supporting [`next/future/image`](https://nextjs.org/docs/api-ref
 
 ```js
 // next.config.js
-const withImageLoader = require('next-image-loader')
+const { withImageLoader } = require('next-image-loader')
 
 module.exports = withImageLoader({
   experimental: {
