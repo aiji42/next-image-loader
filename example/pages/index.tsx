@@ -56,14 +56,14 @@ imageLoader.loader = ({ src, width, quality }) => {
         <code
           className={styles.code}
         >{`<Image src="/beach_huts.jpg" priority width={712} height={457} />`}</code>
-        <Image src="/beach_huts.jpg" priority width={712} height={457} />
+        <Image alt="beach_huts" src="/beach_huts.jpg" priority width={712} height={457} />
 
         <div style={{ marginTop: 32 }} />
 
         <code
           className={styles.code}
         >{`<Image src="/beach_huts.jpg" width={712} height={457} quality={5} />`}</code>
-        <Image src="/beach_huts.jpg" width={712} height={457} quality={5} />
+        <Image alt="beach_huts" src="/beach_huts.jpg" width={712} height={457} quality={5} />
       </main>
 
       <footer className={styles.footer} />
