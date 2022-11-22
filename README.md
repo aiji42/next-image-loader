@@ -53,26 +53,6 @@ imageLoader.loader = ({ src, width, quality }) => {
 }
 ```
 
-### `next/future/image` (Next.js >= v12.2)
-
-This library is supporting [`next/future/image`](https://nextjs.org/docs/api-reference/next/future/image) on Next.js since v12.2.
-
-```js
-// next.config.js
-const { withImageLoader } = require('next-image-loader')
-
-module.exports = withImageLoader({
-  experimental: {
-    images: {
-      allowFutureImage: true,
-    },
-  },
-  // write your next.js configuration values.
-})
-```
-
-Note, however, that this is experimental and may become unavailable due to specification changes on the Next.js side.
-
 ## Contributing
 Please read [CONTRIBUTING.md](https://github.com/aiji42/next-image-loader/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 

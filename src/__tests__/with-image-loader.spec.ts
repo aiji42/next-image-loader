@@ -84,7 +84,7 @@ describe('withImageLoader', () => {
     const config = withImageLoader({})
     expect(config.webpack(...defaultWebpackArgs).resolve.alias).toEqual({
       'next/image': 'next-image-loader/build/image',
-      'next/future/image': 'next-image-loader/build/future/image'
+      'next/legacy/image': 'next-image-loader/build/legacy/image'
     })
   })
   it('Inherits the given webpack.', () => {
