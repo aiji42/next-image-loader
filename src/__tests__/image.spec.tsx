@@ -18,6 +18,7 @@ describe('CustomImage', () => {
     imageLoader.loader = customImageLoader
     render(
       <CustomImage
+        alt="example"
         src="https://example.com/foo.png"
         width={100}
         height={200}
@@ -35,6 +36,7 @@ describe('CustomImage', () => {
     imageLoader.loader = customImageLoader
     render(
       <CustomImage
+        alt="example"
         src="https://example.com/foo.png"
         width={100}
         height={200}
@@ -55,6 +57,7 @@ describe('CustomImage', () => {
     imageLoader.loader = undefined
     render(
       <CustomImage
+        alt="example"
         src="/foo.png"
         width={100}
         height={200}
@@ -69,7 +72,7 @@ describe('CustomImage', () => {
   })
 })
 
-describe('CustomFutureImage', () => {
+describe('CustomLegacyImage', () => {
   const oldEnv = { ...process.env }
   beforeEach(() => {
     cleanup()
@@ -88,7 +91,7 @@ describe('CustomFutureImage', () => {
   })
 
   test('The loader configured in config must be used.', async () => {
-    const CustomFutureImage = await import('../future/image').then(
+    const CustomFutureImage = await import('../legacy/image').then(
       (mod) => mod.default
     )
     imageLoader.loader = customImageLoader
@@ -108,7 +111,7 @@ describe('CustomFutureImage', () => {
   })
 
   test('The props loader must be used first.', async () => {
-    const CustomFutureImage = await import('../future/image').then(
+    const CustomFutureImage = await import('../legacy/image').then(
       (mod) => mod.default
     )
     imageLoader.loader = customImageLoader
@@ -132,7 +135,7 @@ describe('CustomFutureImage', () => {
   })
 
   test('If no loader is defined, the default loader in next/image must be used.', async () => {
-    const CustomFutureImage = await import('../future/image').then(
+    const CustomFutureImage = await import('../legacy/image').then(
       (mod) => mod.default
     )
     imageLoader.loader = undefined
