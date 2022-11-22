@@ -1519,10 +1519,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-next-image-loader@2.2.0-beta.1:
-  version "2.2.0-beta.1"
-  resolved "https://registry.yarnpkg.com/next-image-loader/-/next-image-loader-2.2.0-beta.1.tgz#6db0e438f3b85b564f96208376cfe8ed1f8f5448"
-  integrity sha512-JaxWMyNhjfYKFeDHzeK20QxBKegvUZBzI6aYvsnyyvuEAgC/CQL/xAVksPRSHXM4yGn17bu/jADiLHbowjsApg==
+next-image-loader@3.0.0-beta.1:
+  version "3.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/next-image-loader/-/next-image-loader-3.0.0-beta.1.tgz#1626985515a7da1fba864bfd936c8080b573b4fd"
+  integrity sha512-9svXKwK/Rbwm6GBxfwlvdrXGW0obIsJqWfL4jPGDxIR/pMSVHYl2plr+D/RgnuK9EjkfwQHlqb/n+eEH/oeYag==
 
 next@13.0.4:
   version "13.0.4"
