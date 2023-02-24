@@ -1,6 +1,11 @@
 [![codecov](https://codecov.io/gh/aiji42/next-image-loader/branch/main/graph/badge.svg?token=Y1M1LMIR7E)](https://codecov.io/gh/aiji42/next-image-loader)
 [![npm version](https://badge.fury.io/js/next-image-loader.svg)](https://badge.fury.io/js/next-image-loader)
 
+**🚨This library has already been marked as deprecated.🚨**  
+Please consider Next.js v13, which already has the same functionality as this library.
+
+https://nextjs.org/docs/api-reference/next/image#loader-configuration
+
 # :city_sunrise: next-image-loader
 
 This plugin enables you to transparently replace the loader of `next/image` with a self-defined custom loader.
